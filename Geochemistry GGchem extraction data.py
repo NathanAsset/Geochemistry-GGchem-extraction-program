@@ -75,8 +75,8 @@ def lprod(l,tot2,lH,lgf):
         lgf.append(lgcr)                        #Add the list of one gas to the final list
     return(lgf)
 
-#Function calculating the sum of molar fraction
-def sfu(T,lg):                                       of all gas,for each temperature
+#Function calculating the sum of molar fraction of all gas,for each temperature
+def sfu(T,lg):
     lgt=[]
     for i in range (0,len(T)):      #For each temperature
         so=0
@@ -86,20 +86,20 @@ def sfu(T,lg):                                       of all gas,for each tempera
     return(lgt)
 
 #Creation and save data file
-def sauvfil(name,lng,lg,T):
+def sauvfil(name,lng,lfg,T):
     fichsauv=open('C:/Users/natha/Desktop/'+name+'.csv','w')    #Opening of a file and definition of its name
     prli="T;"
     for sauvg in range (0,len(lng)):
         prli=prli+str(lng[sauvg])+";"
-        prli=prli+"\n"                          #Writing the frist line with the temperature and the name of the gas with oxygen
-        fichsauv.write(prli)
+    prli=prli+"\n"                          #Writing the frist line with the temperature and the name of the gas with oxygen
+    fichsauv.write(prli)
     for ligne in range (0,len(T)):          #Writing the lines for each temperature,of the Partial Pressure of the gas with oxygen
         CvT=str(T[ligne])+';'
         val=CvT
-        for ligng in range(0,len(lg)-1):
-            Cvg=str(lgf[ligng][ligne])+';'
+        for ligng in range(0,len(lfg)-1):
+            Cvg=str(lfg[ligng][ligne])+';'
             val=val+Cvg
-        Cvgf=str(lgf[len(lg)-1][ligne])+'\n'
+        Cvgf=str(lfg[len(lfg)-1][ligne])+'\n'
         val=val+Cvgf
         fichsauv.write(val)
     fichsauv.close()
@@ -279,8 +279,8 @@ for cO in range(0,len(lsolid)):      # Add the condensates with O to a list of n
 
 # Calcul of the quantity of Si and O in the different gas and condensates
 #Dictionaries with the fraction of Si or O in a given molecule
-dfO={'O':1, 'O2':1, 'OH':0.9407303, 'NO':0.53331987, 'ALO':0.3722342, 'SIO':0.3629167, 'CAO':0.2853041, 'ALOH':0.3637046, 'HALO':0.3637046, 'ALO2H':0.5334067, 'ALO2':0.5425229, 'AL2O':0.228678, 'AL2O2':0.3722342, 'CAOH':0.2802663, 'CA(OH)2':0.4318685, 'HNO':0.5158688, 'HONO':0.6806246, 'HNO2':0.6806246, 'HNO3':0.7617157, 'HO2':0.9694601, 'H2O':0.8880933, 'NO2':0.6955376, 'NO3':0.774099, 'N2O':0.3635112, 'N2O3':0.6314531, 'N2O4':0.6955376, 'N2O5':0.7406368, 'SIO2':0.5325589, 'O3':1,' SiO2[l]':0.5325589,' SiO2':0.5325589,' Al2O3[l]':0.4707388,' Al2O3':0.4707388,' CaO[l]':0.2853041,' CaO':0.2853041,' CaSiO3':0.6308547,' Ca2Al2SiO7':0.4084377,' Ca2SiO4':0.3715567,' CaAl2Si2O8':0.4600636,' Ca3Al2Si3O12':0.426219463}
-dfSi={'Si':1, 'SI2':1, 'SIH':0.9653531, 'SIN':0.6672376, 'SIO':0.6370833, 'SIH4':0.874461, 'SI2N':0.800411, 'SIO2':0.4674411, 'SI3':1, 'SIH2':0.9330266, 'SIH3':0.902795,' SiO2[l]':0.4674411,' SiO2':0.4674411,' CaSiO3':0.3691453,' Ca2Al2SiO7':0.1024276,' Ca2SiO4':0.3715567,' CaAl2Si2O8':0.2019051,' Ca3Al2Si3O12':0.187055439}
+dfO={'O':1, 'O2':1, 'OH':0.9407303, 'NO':0.53331987, 'ALO':0.3722342, 'SIO':0.3629167, 'CAO':0.2853041, 'ALOH':0.3637046, 'HALO':0.3637046, 'ALO2H':0.5334067, 'ALO2':0.5425229, 'AL2O':0.228678, 'AL2O2':0.3722342, 'CAOH':0.2802663, 'CA(OH)2':0.4318685, 'HNO':0.5158688, 'HONO':0.6806246, 'HNO2':0.6806246, 'HNO3':0.7617157, 'HO2':0.9694601, 'H2O':0.8880933, 'NO2':0.6955376, 'NO3':0.774099, 'N2O':0.3635112, 'N2O3':0.6314531, 'N2O4':0.6955376, 'N2O5':0.7406368, 'SIO2':0.5325589, 'O3':1,' SiO2[l]':0.5325589,' SiO2':0.5325589,' Al2O3[l]':0.4707388,' Al2O3':0.4707388,' CaO[l]':0.2853041,' CaO':0.2853041,' CaSiO3':0.6308547,' Ca2Al2SiO7':0.4084377,' Ca2SiO4':0.3715567,' CaAl2Si2O8':0.4600636,' Ca3Al2Si3O12':0.426219463,' Mg2SiO4':0.45483524,' Mg2SiO4[l]':0.45483524,' MgSiO3':0.47809348,' MgSiO3[l]':0.47809348,' Na2SiO3':0.39321659,' Na2SiO3[l]':0.39321659,' K2SiO3[l]':0.31109815,' Ca3MgSi2O8':0.38938021,' Ca2MgSi2O7':0.41078751,' KAlSiO4':0.40462045,' KAlSi2O6':0.43984203,'NAO':0.41034651,'MGO':0.39690888,'KO':0.29036825,'TIO':0.25049711,'FEO':0.22267533,'TIO2':0.36424278,' MgAl2O4':0.44982368,' MgAl2O4[l]':0.44982368,' FeO[l]':0.2267533,' MgFe2O4':0.3199704,' Fe2O3':0.30055042,' Fe3O4':0.27638569,' CaMgSi2O6':0.4432818,' KAlSi3O8':0.4898569,' NaAlSi3O8':0.4881091,' Ca3Fe2Si3O12':0.3777964,'CUO':0.2011314}
+dfSi={'Si':1, 'SI2':1, 'SIH':0.9653531, 'SIN':0.6672376, 'SIO':0.6370833, 'SIH4':0.874461, 'SI2N':0.800411, 'SIO2':0.4674411, 'SI3':1, 'SIH2':0.9330266, 'SIH3':0.902795,' SiO2[l]':0.4674411,' SiO2':0.4674411,' CaSiO3':0.3691453,' Ca2Al2SiO7':0.1024276,' Ca2SiO4':0.3715567,' CaAl2Si2O8':0.2019051,' Ca3Al2Si3O12':0.187055439,' Mg2SiO4':0.199610523,' Mg2SiO4[l]':0.199610523,' MgSiO3':0.27975695,' MgSiO3[l]':0.27975695,' Na2SiO3':0.23009114,' Na2SiO3[l]':0.23009114,' K2SiO3[l]':0.18203944,' Ca3MgSi2O8':0.17088471,' Ca2MgSi2O7':0.20603382,' KAlSiO4':0.17757309,' KAlSi2O6':0.25737407,' CaMgSi2O6':0.2593868,' KAlSi3O8':0.3027215,' NaAlSi3O8':0.3213198,' Ca3Fe2Si3O12':0.165801}
 
 lSie=[]
 lOe=[]
@@ -420,8 +420,8 @@ for a in range(0, len(lfSitot)):
     ld30Si.append(d30Sico)
 
 ###Phase of generation of files for save data
-num=1                                   #Number of the simulation
-sub='SH'+str(num)                       #Name of the simulation + the number of the simulation
+num=9                                  #Number of the simulation
+sub='STrinity '+str(num)                       #Name of the simulation + the number of the simulation
 
 sauvfil('Pression Partielle O '+sub,lOg,lOgf,T)         #Save the oxygen partial pressure data
 sauvfil('fO '+sub,lOg,lfOel,T)                          #Save the fO data
@@ -484,7 +484,7 @@ fichsauv.close()
 
 
 # Phase of Graphics generation
-gra=2.3         #Choose the graphics
+gra=0         #Choose the graphics
 
 #List of color for the graphics
 lc=['red','orange','yellow','green','cyan','blue','violet','pink','brown','coral','gold','lawngreen','forestgreen','turquoise','blueviolet','deeppink','chocolate','lime','fuschia','skyblue','silver','peachpuff','seagreen','lightsalmon','darkviolet','moccasin','aquamarine','firebrick','royalblue','saddlebrown','beige','rebeccapurple','navy','peru','forestgreen','dimgray','deepskyblue']
@@ -538,7 +538,7 @@ if gra==2.3: #Graphic representing the fSitot vs T, with the fSiO, fSiO2, fSi, a
     plt.savefig(fname)
     plt.close()
 
-gra=2.4
+gra=0
 
 if gra==2.4: #Graphic representing the fOtot vs T, with the fO, fO2, fOH, fSiO, fH2O, and fSiO2
     fig, ax1 = plt.subplots()
